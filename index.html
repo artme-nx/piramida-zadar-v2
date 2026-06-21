@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza&bar Piramida — Zadar | Vatra, tijesto, večer</title>
+<meta name="description" content="Pizza&bar Piramida, Zadar — pizza iz krušne peći u toploj večernjoj atmosferi. Paste, vino i koktELI uz žar peći. Ocjena 4.8. Rezerviraj stol.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1B1512;
+  --bg2:#241B16;
+  --wood:#6E4B2E;
+  --ember:#E2741F;
+  --ember-soft:#F0A04B;
+  --cream:#F4E9DA;
+  --muted:#B8A593;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;letter-spacing:-.01em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,90vw);margin:0 auto}
+section{position:relative}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:22px 0;transition:all .45s ease}
+header.solid{background:rgba(27,21,18,.85);backdrop-filter:blur(12px);padding:14px 0;border-bottom:1px solid rgba(226,116,31,.18)}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Fraunces';font-weight:600;font-size:1.45rem;color:var(--cream);display:flex;align-items:center;gap:10px}
+.logo .fl{color:var(--ember)}
+.navlinks{display:flex;gap:32px;align-items:center}
+.navlinks a{font-size:.92rem;color:var(--muted);transition:color .25s;letter-spacing:.01em}
+.navlinks a:hover{color:var(--ember-soft)}
+.cta{background:var(--ember);color:#1B1512;padding:12px 26px;border-radius:4px;font-weight:600;font-size:.9rem;transition:all .3s;display:inline-block}
+.cta:hover{background:var(--ember-soft);transform:translateY(-2px)}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+.menu-toggle span{width:26px;height:2px;background:var(--cream);display:block}
+
+/* HERO */
+.hero{height:100vh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden;position:relative}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(27,21,18,.55) 0%,rgba(27,21,18,.2) 35%,rgba(27,21,18,.92) 100%)}
+.hero-glow{position:absolute;bottom:-12%;left:50%;transform:translateX(-50%);width:60vw;height:50vh;background:radial-gradient(ellipse at center,rgba(226,116,31,.45),transparent 65%);z-index:1;pointer-events:none;filter:blur(20px)}
+.hero-inner{position:relative;z-index:2;padding-bottom:90px;width:100%}
+.hero .kicker{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember-soft);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero .kicker::before{content:"";width:42px;height:1px;background:var(--ember-soft)}
+.hero h1{font-size:clamp(3rem,8.5vw,7rem);color:var(--cream);max-width:14ch}
+.hero h1 em{font-style:italic;color:var(--ember-soft)}
+.hero .word{display:inline-block}
+.hero p.lead{font-size:1.2rem;color:var(--muted);max-width:46ch;margin:30px 0 38px;line-height:1.6}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn-outline{border:1px solid rgba(244,233,218,.35);color:var(--cream);padding:12px 26px;border-radius:4px;font-weight:500;font-size:.9rem;transition:all .3s}
+.btn-outline:hover{border-color:var(--ember);color:var(--ember-soft)}
+.hero-rating{display:flex;align-items:center;gap:10px;color:var(--cream);font-size:.95rem}
+.hero-rating b{font-family:'Fraunces';font-size:1.3rem;color:var(--ember-soft)}
+
+/* INTRO / MANIFEST word reveal */
+.manifest{padding:130px 0;background:var(--bg2)}
+.manifest .lab{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin-bottom:34px}
+.manifest .statement{font-family:'Fraunces';font-weight:400;font-size:clamp(1.7rem,3.8vw,3rem);line-height:1.28;max-width:22ch;color:var(--cream)}
+.manifest .statement .w{display:inline-block;opacity:.18}
+.manifest .statement em{color:var(--ember-soft);font-style:italic}
+.manifest .sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:70px;align-items:start}
+.manifest .sub-grid p{color:var(--muted);font-size:1.05rem;line-height:1.8}
+.manifest .sub-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px}
+
+/* SECTION head */
+.sec-head{text-align:center;margin-bottom:64px}
+.sec-head .lab{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin-bottom:18px}
+.sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--cream)}
+.sec-head h2 em{font-style:italic;color:var(--ember-soft)}
+
+/* MENU */
+.menu-sec{padding:120px 0}
+.menu-block{margin-bottom:72px}
+.menu-block h3{font-family:'Fraunces';font-style:italic;font-size:2rem;color:var(--ember-soft);margin-bottom:6px}
+.menu-block .note{color:var(--muted);font-size:.95rem;margin-bottom:34px}
+.menu-rows{display:grid;grid-template-columns:1fr 1fr;gap:6px 56px}
+.mrow{display:flex;justify-content:space-between;gap:18px;padding:20px 0;border-bottom:1px solid rgba(244,233,218,.1)}
+.mrow .nm{font-family:'Fraunces';font-weight:500;font-size:1.18rem;color:var(--cream);margin-bottom:6px}
+.mrow .ds{font-size:.92rem;color:var(--muted);line-height:1.5}
+.mrow .tag{flex-shrink:0;color:var(--ember);font-size:1.1rem}
+
+/* FEATURE split */
+.feature{padding:120px 0;background:var(--bg2)}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.feature img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px}
+.feature .lab{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin-bottom:20px}
+.feature h2{font-size:clamp(2rem,4vw,3rem);color:var(--cream);margin-bottom:24px}
+.feature h2 em{font-style:italic;color:var(--ember-soft)}
+.feature p{color:var(--muted);font-size:1.06rem;line-height:1.8;margin-bottom:18px}
+
+/* GALLERY */
+.gallery{padding:120px 0}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gal-item{overflow:hidden;border-radius:8px}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gal-item:hover img{transform:scale(1.07)}
+.gal-item.a{grid-column:span 2;grid-row:span 2}
+.gal-item.b{grid-column:span 2}
+
+/* LOCATION */
+.location{padding:120px 0;background:var(--bg2)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.loc-info .lab{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin-bottom:18px}
+.loc-info h2{font-size:clamp(2rem,4vw,3rem);color:var(--cream);margin-bottom:30px}
+.loc-row{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid rgba(244,233,218,.1)}
+.loc-row .ic{font-size:1.3rem;color:var(--ember)}
+.loc-row h4{font-family:'Fraunces';font-size:1.1rem;color:var(--cream);margin-bottom:5px}
+.loc-row p,.loc-row a{color:var(--muted);font-size:.98rem;line-height:1.5}
+.loc-row a:hover{color:var(--ember-soft)}
+.hours{margin-top:6px}
+.hours .hr{display:flex;justify-content:space-between;padding:9px 0;font-size:.96rem;border-bottom:1px solid rgba(244,233,218,.07);color:var(--muted)}
+.hours .hr b{color:var(--cream);font-weight:500}
+.map-wrap{border-radius:10px;overflow:hidden;min-height:460px;border:1px solid rgba(244,233,218,.12)}
+.map-wrap iframe{width:100%;height:100%;min-height:460px;border:0;filter:grayscale(.3) sepia(.2) brightness(.85)}
+
+/* FOOTER */
+footer{padding:90px 0 40px;background:var(--bg);border-top:1px solid rgba(226,116,31,.15)}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:50px;margin-bottom:56px}
+.foot-logo{font-family:'Fraunces';font-weight:600;font-size:1.7rem;color:var(--cream);margin-bottom:18px}
+.foot-logo span{color:var(--ember)}
+footer p{color:var(--muted);line-height:1.7;font-size:.98rem;max-width:38ch}
+.fcol h5{font-family:'Fraunces';font-size:1.05rem;color:var(--cream);margin-bottom:18px}
+.fcol a,.fcol p{display:block;color:var(--muted);font-size:.95rem;margin-bottom:11px;transition:color .25s}
+.fcol a:hover{color:var(--ember-soft)}
+.foot-phone{font-family:'Fraunces';font-size:1.8rem;color:var(--ember-soft);margin-top:6px}
+.foot-bottom{border-top:1px solid rgba(244,233,218,.1);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem;color:var(--muted)}
+
+.reveal{opacity:0;transform:translateY(42px)}
+
+@media(max-width:900px){
+  .manifest .sub-grid,.feature-grid,.loc-grid{grid-template-columns:1fr;gap:36px}
+  .menu-rows{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
+  .gal-item.a,.gal-item.b{grid-column:span 2;grid-row:span 1}
+  .foot-top{grid-template-columns:1fr;gap:32px}
+  .navlinks{position:fixed;top:0;right:-100%;height:100vh;width:76%;background:var(--bg2);flex-direction:column;justify-content:center;gap:30px;transition:right .45s ease;z-index:200}
+  .navlinks.open{right:0}
+  .navlinks a{font-size:1.2rem;color:var(--cream)}
+  .menu-toggle{display:flex;z-index:300}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important}
+  .manifest .statement .w{opacity:1!important}
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  .hero-bg img{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="logo">Piramida<span class="fl">·</span></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#manifest">Vatra</a>
+      <a href="#menu">Meni</a>
+      <a href="#feature">Tijesto</a>
+      <a href="#gallery">Galerija</a>
+      <a href="#location">Kontakt</a>
+      <a href="#location" class="cta">Rezerviraj</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Izbornik"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"><img id="heroImg" src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=1600&q=80" alt="Pizza u krušnoj peći"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="wrap">
+      <div class="kicker">Zadar · Pizza & Bar</div>
+      <h1><span class="word">Tamo</span> <span class="word">gdje</span> <span class="word">vatra</span> <span class="word"><em>priča</em></span> <span class="word">priču.</span></h1>
+      <p class="lead">Krušna peć, sporo dignuto tijesto i topla zadarska večer. Pizza, vino i smijeh oko jednog stola.</p>
+      <div class="hero-ctas">
+        <a href="#location" class="cta">Rezerviraj stol</a>
+        <a href="#menu" class="btn-outline">Otkrij meni</a>
+        <div class="hero-rating"><b>4.8</b><span>★★★★★ · 42 recenzije</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifest" id="manifest">
+  <div class="wrap">
+    <div class="lab">Manifest</div>
+    <p class="statement" id="statement">Vjerujemo da se najbolja <em>pizza</em> ne žuri. Tijesto zri, peć tinja, a večer traje koliko treba.</p>
+    <div class="sub-grid">
+      <img class="reveal" src="https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=800&q=80" alt="Tijesto u pripremi">
+      <p class="reveal">Naša krušna peć grije se na pravom drvu, a žar koji se nakuplja satima daje svaku pizzu onaj nezamjenjiv dimljeni rub. Tijesto dižemo polako, gotovo dva dana, jer vrijeme je tajni sastojak kojeg se ne odričemo. Kad kriška izađe iz peći — mekana u sredini, hrskava na rubu — znaš da je vrijedilo čekati. To je Piramida: jednostavno, vatreno, iskreno.</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu-sec" id="menu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="lab">Naš meni</div>
+      <h2>Iz <em>peći</em> na stol</h2>
+    </div>
+
+    <div class="menu-block reveal">
+      <h3>Pizze iz krušne peći</h3>
+      <p class="note">Tijesto dignuto 48 sati, pečeno na žaru pravog drveta.</p>
+      <div class="menu-rows">
+        <div class="mrow"><div><div class="nm">Piramida</div><div class="ds">San marzano, fior di latte, domaća panceta, pečeni češnjak, bosiljak</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Margherita</div><div class="ds">Rajčica, mozzarella, svježi bosiljak, maslinovo ulje</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Diavola</div><div class="ds">Pikantna salama, ljuta paprika, mozzarella</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Quattro Formaggi</div><div class="ds">Mozzarella, gorgonzola, parmezan, dimljeni sir, kap meda</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Dalmatinka</div><div class="ds">Pršut, rikola, cherry rajčica, listići parmezana</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Tartufata</div><div class="ds">Krema od tartufa, mozzarella, šampinjoni, parmezan</div></div><span class="tag">▲</span></div>
+      </div>
+    </div>
+
+    <div class="menu-block reveal">
+      <h3>Paste & domaće</h3>
+      <p class="note">Kuhano polako, posluženo s dušom.</p>
+      <div class="menu-rows">
+        <div class="mrow"><div><div class="nm">Pasta Piramida</div><div class="ds">Penne s pancetom, vrhnjem i mladim lukom</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Frutti di Mare</div><div class="ds">Špageti s plodovima mora u umaku od bijelog vina</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Gnocchi Gorgonzola</div><div class="ds">Domaći njoki u kremastom umaku od plavog sira</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Lazanje Bolognese</div><div class="ds">Slojevi tijesta i sporo kuhanog mesnog ragua</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Crni rižoto</div><div class="ds">Rižoto sa sipom — klasik jadranske kuhinje</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Tagliatelle Tartufo</div><div class="ds">Svježa pasta s kremom od tartufa i parmezanom</div></div><span class="tag">▲</span></div>
+      </div>
+    </div>
+
+    <div class="menu-block reveal">
+      <h3>Bar & pića</h3>
+      <p class="note">Od zalaska do zadnje runde.</p>
+      <div class="menu-rows">
+        <div class="mrow"><div><div class="nm">Aperol Spritz</div><div class="ds">Aperol, prosecco i soda — zadarski zalazak u čaši</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Negroni</div><div class="ds">Gin, Campari, crveni vermut</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Dalmatinska vina</div><div class="ds">Plavac, Pošip i Debit — na čaše i u boci</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Craft & točena piva</div><div class="ds">Lokalna i uvozna, uvijek hladna</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Limunada Piramida</div><div class="ds">Svježi limun, menta i kap meda</div></div><span class="tag">▲</span></div>
+        <div class="mrow"><div><div class="nm">Espresso</div><div class="ds">Pravi talijanski espresso i sve varijacije</div></div><span class="tag">▲</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature" id="feature">
+  <div class="wrap feature-grid">
+    <img class="reveal" src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=800&q=80" alt="Pizza iz peći">
+    <div class="reveal">
+      <div class="lab">Naša priča</div>
+      <h2>Kvartovsko <em>okupljalište</em></h2>
+      <p>Piramida je nastala iz jednostavne želje — napraviti mjesto gdje se susjedi, prijatelji i znatiželjni prolaznici osjećaju kao kod kuće. Bez pompe, bez pretjerivanja, samo dobra pizza i iskreno gostoprimstvo.</p>
+      <p>Godinama smo dio zadarske svakodnevice: mjesto gdje se slavi pobjeda, popije hladno pivo nakon posla i gdje miris krušne peći najavljuje da je dan dobro završio. Ocjena 4.8 od naših gostiju najljepša nam je nagrada — i razlog da svaku večer zapalimo peć iznova.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="lab">Galerija</div>
+      <h2>Žar, <em>tijesto</em>, dobro društvo</h2>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item a reveal"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" alt="Pizza odozgo"></div>
+      <div class="gal-item reveal"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Koktel"></div>
+      <div class="gal-item reveal"><img src="https://images.unsplash.com/photo-1572552635104-daf938e0aa1f?auto=format&fit=crop&w=500&q=80" alt="Tijesto"></div>
+      <div class="gal-item b reveal"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Gosti u toploj atmosferi"></div>
+      <div class="gal-item reveal"><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=500&q=80" alt="Bar atmosfera"></div>
+      <div class="gal-item reveal"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=80" alt="Interijer navečer"></div>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="location">
+  <div class="wrap">
+    <div class="loc-grid">
+      <div class="loc-info reveal">
+        <div class="lab">Posjeti nas</div>
+        <h2>Lokacija & <em>rezervacije</em></h2>
+        <div class="loc-row"><div class="ic">📍</div><div><h4>Adresa</h4><p>Pizza&bar Piramida, Zadar, Hrvatska</p></div></div>
+        <div class="loc-row"><div class="ic">📞</div><div><h4>Rezervacije & narudžbe</h4><a href="tel:+385976752708">+385 97 675 2708</a></div></div>
+        <div class="loc-row"><div class="ic">🕯️</div><div style="flex:1"><h4>Radno vrijeme</h4>
+          <div class="hours">
+            <div class="hr"><span>Pon – Čet</span><b>11:00 – 23:00</b></div>
+            <div class="hr"><span>Pet – Sub</span><b>11:00 – 00:00</b></div>
+            <div class="hr"><span>Nedjelja</span><b>12:00 – 23:00</b></div>
+          </div>
+        </div></div>
+        <div style="margin-top:30px"><a href="tel:+385976752708" class="cta">Nazovi i rezerviraj</a></div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://maps.google.com/maps?q=Pizza+bar+Piramida+Zadar&output=embed" loading="lazy" title="Lokacija Pizza&bar Piramida Zadar"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo">Pizza&bar Piramida<span>.</span></div>
+        <p>Pizza iz krušne peći, paste i dobra pića u toploj zadarskoj večeri. Dođi gladan, ostani zbog vatre.</p>
+      </div>
+      <div class="fcol">
+        <h5>Istraži</h5>
+        <a href="#manifest">Manifest</a>
+        <a href="#menu">Meni</a>
+        <a href="#feature">Naša priča</a>
+        <a href="#gallery">Galerija</a>
+      </div>
+      <div class="fcol">
+        <h5>Rezervacije</h5>
+        <p>Zadar, Hrvatska</p>
+        <a href="tel:+385976752708" class="foot-phone">097 675 2708</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pizza&bar Piramida — Zadar. Sva prava pridržana.</span>
+      <span>Pečeno na pravom drvu.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('solid', window.scrollY > 40);
+onScroll(); window.addEventListener('scroll', onScroll);
+
+const toggle = document.getElementById('menuToggle');
+const navlinks = document.getElementById('navlinks');
+toggle.addEventListener('click', () => navlinks.classList.toggle('open'));
+navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+/* Wrap statement words for reveal */
+const stmt = document.getElementById('statement');
+(function wrapWords(){
+  const walk = document.createTreeWalker(stmt, NodeFilter.SHOW_TEXT);
+  const nodes=[]; let n; while(n=walk.nextNode()) nodes.push(n);
+  nodes.forEach(node=>{
+    const parts = node.textContent.split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    parts.forEach(p=>{
+      if(p.trim()===''){frag.appendChild(document.createTextNode(p));}
+      else{const s=document.createElement('span');s.className='w';s.textContent=p;frag.appendChild(s);}
+    });
+    node.parentNode.replaceChild(frag,node);
+  });
+})();
+
+if(!reduceMotion){
+  const lenis = new Lenis({lerp:.1, smoothWheel:true});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t)=>lenis.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* Hero zoom-on-load + content */
+  gsap.fromTo('#heroImg', {scale:1.18}, {scale:1, duration:2.2, ease:'power2.out'});
+  gsap.from('.hero .kicker, .hero h1 .word, .hero .lead, .hero-ctas', {y:34, opacity:0, duration:1, ease:'power3.out', stagger:.08, delay:.3});
+
+  /* Word reveal in manifest */
+  gsap.to('#statement .w', {opacity:1, duration:.05, ease:'none', stagger:.04,
+    scrollTrigger:{trigger:'#statement', start:'top 78%', end:'bottom 55%', scrub:.6}});
+
+  /* Reveals */
+  gsap.utils.toArray('.reveal').forEach(el=>{
+    gsap.to(el, {opacity:1, y:0, duration:1, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 88%'}});
+  });
+
+  /* subtle parallax on hero */
+  gsap.to('#heroImg', {yPercent:14, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+} else {
+  document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity=1;el.style.transform='none';});
+  document.querySelectorAll('#statement .w').forEach(el=>el.style.opacity=1);
+}
+</script>
+</body>
+</html>
