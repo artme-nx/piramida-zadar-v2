@@ -117,7 +117,7 @@ header.solid{background:rgba(20,18,16,.85);backdrop-filter:blur(12px);padding:14
 .menu-toggle span{width:26px;height:2px;background:var(--cream);display:block}
 
 /* HERO */
-.hero{height:100vh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden;position:relative}
+.hero{height:100vh;height:100svh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden;position:relative}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,16,.55) 0%,rgba(20,18,16,.2) 35%,rgba(20,18,16,.92) 100%)}
@@ -229,7 +229,7 @@ footer p{color:var(--muted);line-height:1.7;font-size:.98rem;max-width:38ch}
   .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
   .gal-item.a,.gal-item.b{grid-column:span 2;grid-row:span 1}
   .foot-top{grid-template-columns:1fr;gap:32px}
-  .navlinks{position:fixed;top:0;right:-100%;height:100vh;width:76%;background:var(--bg2);flex-direction:column;justify-content:center;gap:30px;transition:right .45s ease;z-index:200}
+  .navlinks{position:fixed;top:0;right:-100%;height:100vh;height:100svh;width:76%;background:var(--bg2);flex-direction:column;justify-content:center;gap:30px;transition:right .45s ease;z-index:200}
   .navlinks.open{right:0}
   .navlinks a{font-size:1.2rem;color:var(--cream)}
   .menu-toggle{display:flex;z-index:300}
@@ -445,7 +445,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 const header = document.getElementById('header');
 const onScroll = () => header.classList.toggle('solid', window.scrollY > 40);
-onScroll(); window.addEventListener('scroll', onScroll);
+onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
 const toggle = document.getElementById('menuToggle');
 const navlinks = document.getElementById('navlinks');
@@ -469,9 +469,9 @@ const stmt = document.getElementById('statement');
 })();
 
 if(!reduceMotion){
-  const lenis = new Lenis({lerp:0.2, wheelMultiplier:1, smoothWheel:true, syncTouch:false});
-  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
-  requestAnimationFrame(raf);
+  const lenis = new Lenis({lerp:0.1, wheelMultiplier:1, smoothWheel:true, syncTouch:false}); window.__lenis = lenis;
+  gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+  gsap.ticker.lagSmoothing(0);
 
   gsap.registerPlugin(ScrollTrigger);
   lenis.on('scroll', ScrollTrigger.update);
@@ -498,6 +498,48 @@ if(!reduceMotion){
   document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity=1;el.style.transform='none';});
   document.querySelectorAll('#statement .w').forEach(el=>el.style.opacity=1);
 }
+</script>
+
+<script>
+/* QA scroll-fix — glatko, bez lomova i preskakanja (mobitel prioritet) */
+(function(){
+  var lenis = window.__lenis || null;
+
+  /* jedinstveni smooth-scroll ulaz: Lenis ako postoji, inače nativni */
+  window.__smoothTo = function(target){
+    var el = (typeof target === 'string') ? document.querySelector(target) : target;
+    if(!el) return;
+    if(lenis){ lenis.scrollTo(el, {offset:0, duration:1.1}); }
+    else { el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  };
+
+  /* anchor linkovi kroz isti ulaz — nema nativnog skoka preko Lenisa */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href || href === '#') return;
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(href);
+      if(!el) return;
+      e.preventDefault();
+      window.__smoothTo(el);
+      if(history.replaceState) history.replaceState(null, '', href);
+    });
+  });
+
+  /* ScrollTrigger pozicije preračunati kad se layout slegne (slike!) */
+  if(window.ScrollTrigger){
+    var refresh = function(){ ScrollTrigger.refresh(); };
+    window.addEventListener('load', refresh);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+    document.querySelectorAll('img').forEach(function(img){
+      if(!img.complete) img.addEventListener('load', refresh, {once:true});
+    });
+    var rt; window.addEventListener('resize', function(){
+      clearTimeout(rt); rt = setTimeout(refresh, 150);
+    }, {passive:true});
+    setTimeout(refresh, 600);
+  }
+})();
 </script>
 </body>
 </html>
